@@ -45,8 +45,9 @@ defmodule LiveViewStudioWeb.SearchLive do
 
       stores ->
         socket =
-          assign(
-            socket,
+          socket
+          |> clear_flash()
+          |> assign(
             zip: zip,
             stores: stores,
             loading: false

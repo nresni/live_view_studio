@@ -2,13 +2,16 @@ defmodule LiveViewStudioWeb.FlightsLive do
   use LiveViewStudioWeb, :live_view
 
   alias LiveViewStudio.Flights
+  alias LiveViewStudio.Airports
 
   def mount(_params, _, socket) do
     socket =
       assign(
         socket,
         number: "",
+        airport: "",
         flights: [],
+        matches: [],
         loading: false
       )
 
@@ -23,12 +26,55 @@ defmodule LiveViewStudioWeb.FlightsLive do
     {:noreply, socket}
   end
 
+  def handle_event("search-airport", %{"airport" => airport}, socket) do
+    send(self(), {:run_search_airport, airport})
+
+    socket = assign(socket, airport: airport, flights: [], loading: true)
+
+    {:noreply, socket}
+  end
+
+  def handle_event("suggest-airport", %{"airport" => prefix}, socket) do
+    socket =
+      assign(socket,
+        matches: Airports.suggest(prefix)
+      )
+
+    {:noreply, socket}
+  end
+
   def handle_info({:search, number}, socket) do
     case Flights.search_by_number(number) do
       [] ->
         socket =
           socket
           |> put_flash(:info, "No matching flights for number: \"#{number}\"")
+          |> assign(
+            loading: false,
+            flights: []
+          )
+
+        {:noreply, socket}
+
+      flights ->
+        socket =
+          socket
+          |> clear_flash()
+          |> assign(
+            loading: false,
+            flights: flights
+          )
+
+        {:noreply, socket}
+    end
+  end
+
+  def handle_info({:run_search_airport, airport}, socket) do
+    case Flights.search_by_airport(airport) do
+      [] ->
+        socket =
+          socket
+          |> put_flash(:info, "No matching flights for number: \"#{airport}\"")
           |> assign(
             loading: false,
             flights: []
@@ -67,6 +113,27 @@ defmodule LiveViewStudioWeb.FlightsLive do
           <img src="images/search.svg" />
         </button>
       </form>
+
+      <form phx-submit="search-airport" phx-change="suggest-airport">
+        <input
+          type="text"
+          autocomplete="off"
+          name="airport"
+          value="<%= @airport %>"
+          list="matches"
+          phx-debounce="1000"
+          <%= if @loading, do: "readonly" %>
+        />
+        <button type="submit">
+          <img src="images/search.svg" />
+        </button>
+      </form>
+
+      <datalist id="matches">
+        <%= for match <- @matches do %>
+          <option value="<%= match %>"><%= match %></option>
+        <% end %>
+      </datalist>
 
       <%= if @loading do %>
         <div class="loader">Loading...</div>

@@ -9,12 +9,12 @@ defmodule LiveViewStudioWeb.AutocompleteLive do
       assign(socket,
         zip: "",
         city: "",
-        stores: [],
+        stores: Stores.list_stores(),
         matches: [],
         loading: false
       )
 
-    {:ok, socket}
+    {:ok, socket, temporary_assigns: []}
   end
 
   def render(assigns) do

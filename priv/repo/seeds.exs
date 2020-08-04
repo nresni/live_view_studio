@@ -10,149 +10,77 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
+alias LiveViewStudio.GitRepos.GitRepo
 alias LiveViewStudio.Repo
-alias LiveViewStudio.Boats.Boat
 
-%Boat{
-  model: "1760 Retriever Jon Deluxe",
-  price: "$",
-  type: "fishing",
-  image: "/images/boats/1760-retriever-jon-deluxe.jpg"
+%GitRepo{
+  name: "elixir",
+  url: "https://github.com/elixir-lang/elixir",
+  owner_login: "elixir-lang",
+  owner_url: "https://github.com/elixir-lang",
+  fork: false,
+  stars: 16900,
+  language: "elixir",
+  license: "apache"
 }
 |> Repo.insert!()
 
-%Boat{
-  model: "1650 Super Hawk",
-  price: "$",
-  type: "fishing",
-  image: "/images/boats/1650-super-hawk.jpg"
+%GitRepo{
+  name: "phoenix",
+  url: "https://github.com/phoenixframework/phoenix",
+  owner_login: "phoenixframework",
+  owner_url: "https://github.com/phoenixframework",
+  fork: false,
+  stars: 15200,
+  language: "elixir",
+  license: "mit"
 }
 |> Repo.insert!()
 
-%Boat{
-  model: "1850 Super Hawk",
-  price: "$$",
-  type: "fishing",
-  image: "/images/boats/1850-super-hawk.jpg"
+%GitRepo{
+  name: "phoenix_live_view",
+  url: "https://github.com/phoenixframework/phoenix_live_view",
+  owner_login: "phoenixframework",
+  owner_url: "https://github.com/phoenixframework",
+  fork: false,
+  stars: 3000,
+  language: "elixir",
+  license: "mit"
 }
 |> Repo.insert!()
 
-%Boat{
-  model: "1950 Super Hawk",
-  price: "$$",
-  type: "fishing",
-  image: "/images/boats/1950-super-hawk.jpg"
+%GitRepo{
+  name: "phoenix_live_view",
+  url: "https://github.com/clarkware/phoenix_live_view",
+  owner_login: "clarkware",
+  owner_url: "https://github.com/clarkware",
+  fork: true,
+  stars: 0,
+  language: "elixir",
+  license: "mit"
 }
 |> Repo.insert!()
 
-%Boat{
-  model: "2050 Authority",
-  price: "$$$",
-  type: "fishing",
-  image: "/images/boats/2050-authority.jpg"
+%GitRepo{
+  name: "rails",
+  url: "https://github.com/rails/rails",
+  owner_login: "rails",
+  owner_url: "https://github.com/rails",
+  fork: false,
+  stars: 45600,
+  language: "ruby",
+  license: "mit"
 }
 |> Repo.insert!()
 
-%Boat{
-  model: "Deep Sea Elite",
-  price: "$$$",
-  type: "fishing",
-  image: "/images/boats/deep-sea-elite.jpg"
-}
-|> Repo.insert!()
-
-%Boat{
-  model: "Beneteau First 14",
-  price: "$$",
-  type: "sailing",
-  image: "/images/boats/beneteau-first-14.jpg"
-}
-|> Repo.insert!()
-
-%Boat{
-  model: "Beneteau First 24",
-  price: "$$$",
-  type: "sailing",
-  image: "/images/boats/beneteau-first-24.jpg"
-}
-|> Repo.insert!()
-
-%Boat{
-  model: "Beneteau Oceanis 31",
-  price: "$$$",
-  type: "sailing",
-  image: "/images/boats/beneteau-oceanis-31.jpg"
-}
-|> Repo.insert!()
-
-%Boat{
-  model: "RS Quest",
-  price: "$",
-  type: "sailing",
-  image: "/images/boats/rs-quest.jpg"
-}
-|> Repo.insert!()
-
-%Boat{
-  model: "RS Feva",
-  price: "$",
-  type: "sailing",
-  image: "/images/boats/rs-feva.jpg"
-}
-|> Repo.insert!()
-
-%Boat{
-  model: "RS Cat 16",
-  price: "$$",
-  type: "sailing",
-  image: "/images/boats/rs-cat-16.jpg"
-}
-|> Repo.insert!()
-
-%Boat{
-  model: "Yamaha SX190",
-  price: "$",
-  type: "sporting",
-  image: "/images/boats/yamaha-sx190.jpg"
-}
-|> Repo.insert!()
-
-%Boat{
-  model: "Yamaha 212X",
-  price: "$$",
-  type: "sporting",
-  image: "/images/boats/yamaha-212x.jpg"
-}
-|> Repo.insert!()
-
-%Boat{
-  model: "Glastron GT180",
-  price: "$",
-  type: "sporting",
-  image: "/images/boats/glastron-gt180.jpg"
-}
-|> Repo.insert!()
-
-%Boat{
-  model: "Glastron GT225",
-  price: "$$",
-  type: "sporting",
-  image: "/images/boats/glastron-gt225.jpg"
-}
-|> Repo.insert!()
-
-%Boat{
-  model: "Yamaha 275E",
-  price: "$$$",
-  type: "sporting",
-  image: "/images/boats/yamaha-275e.jpg"
-}
-|> Repo.insert!()
-
-%Boat{
-  model: "Yamaha 275SD",
-  price: "$$$",
-  type: "sporting",
-  image: "/images/boats/yamaha-275sd.jpg"
+%GitRepo{
+  name: "ruby",
+  url: "https://github.com/ruby/ruby",
+  owner_login: "ruby",
+  owner_url: "https://github.com/ruby",
+  fork: false,
+  stars: 16800,
+  language: "ruby",
+  license: "bsdl"
 }
 |> Repo.insert!()

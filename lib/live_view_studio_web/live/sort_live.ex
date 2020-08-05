@@ -3,16 +3,26 @@ defmodule LiveViewStudioWeb.SortLive do
 
   alias LiveViewStudio.Donations
 
+  @permitted_sort_bys ~w(item quantity days_until_expires)
+  @permitted_orders ~w(asc desc)
+
   def mount(_params, _session, socket) do
     {:ok, socket, temporary_assigns: [donations: []]}
   end
 
   def handle_params(params, _url, socket) do
-    page = String.to_integer(params["page"] || "1")
-    per_page = String.to_integer(params["per_page"] || "5")
+    page = param_to_integer(params["page"], "1")
+    per_page = param_to_integer(params["per_page"], "5")
 
-    sort_by = (params["sort_by"] || "id") |> String.to_atom()
-    sort_order = (params["sort_order"] || "asc") |> String.to_atom()
+    sort_by =
+      params
+      |> param_or_first_permitted("sort_by", @permitted_sort_bys)
+      |> String.to_atom()
+
+    sort_order =
+      params
+      |> param_or_first_permitted("sort_order", @permitted_orders)
+      |> String.to_atom()
 
     paginate_options = %{page: page, per_page: per_page}
     sort_options = %{sort_by: sort_by, sort_order: sort_order}
@@ -45,6 +55,23 @@ defmodule LiveViewStudioWeb.SortLive do
       )
 
     {:noreply, socket}
+  end
+
+  defp param_or_first_permitted(params, key, permitted) do
+    value = params[key]
+    if value in permitted, do: value, else: hd(permitted)
+  end
+
+  defp param_to_integer(nil, default_value), do: default_value
+
+  defp param_to_integer(param, default_value) do
+    case Integer.parse(param) do
+      {number, _} ->
+        number
+
+      :error ->
+        default_value
+    end
   end
 
   defp expires_class(donation) do

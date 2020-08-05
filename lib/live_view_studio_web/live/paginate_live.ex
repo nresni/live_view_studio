@@ -25,6 +25,22 @@ defmodule LiveViewStudioWeb.PaginateLive do
     {:noreply, socket}
   end
 
+  def handle_event("select-per-page", %{"per-page" => per_page}, socket) do
+    socket =
+      push_patch(
+        socket,
+        to:
+          Routes.live_path(
+            socket,
+            __MODULE__,
+            page: socket.assigns.options.page,
+            per_page: per_page
+          )
+      )
+
+    {:noreply, socket}
+  end
+
   defp pagination_link(socket, name, page, per_page, class) do
     live_patch(
       name,

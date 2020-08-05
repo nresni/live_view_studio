@@ -18,13 +18,28 @@
     <h2>Resources</h2>
     <ul>
       <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
+        <%= live_redirect "Light",
+            to: Routes.live_path(@socket, LiveViewStudioWeb.LightLive) %>
       </li>
       <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
+        <%= live_redirect "Team license",
+            to: Routes.live_path(@socket, LiveViewStudioWeb.LicenseLive) %>
       </li>
       <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.5/CHANGELOG.md">v1.5 Changelog</a>
+        <%= live_redirect "Search",
+            to: Routes.live_path(@socket, LiveViewStudioWeb.SearchLive) %>
+      </li>
+       <li>
+        <%= live_redirect "Autocomplete",
+            to: Routes.live_path(@socket, LiveViewStudioWeb.AutocompleteLive) %>
+      </li>
+       <li>
+        <%= live_redirect "Filter",
+            to: Routes.live_path(@socket, LiveViewStudioWeb.FilterLive) %>
+      </li>
+       <li>
+        <%= live_redirect "Servers",
+            to: Routes.live_path(@socket, LiveViewStudioWeb.ServersLive) %>
       </li>
     </ul>
   </article>

@@ -37,7 +37,7 @@
         <div class="status">
             <button phx-click="toggle-status"
                     phx-value-id="<%= volunteer.id %>"
-                    phx-disabled-with="Saving ...">
+                    phx-disable-with="Saving ...">
               <%= if volunteer.checked_out, do: "Check In", else: "Check Out" %>
             </button>
         </div>

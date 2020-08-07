@@ -14,47 +14,6 @@ defmodule LiveViewStudio.Volunteers do
     Phoenix.PubSub.subscribe(LiveViewStudio.PubSub, @topic)
   end
 
-  @doc """
-  Returns the list of volunteers.
-
-  ## Examples
-
-      iex> list_volunteers()
-      [%Volunteer{}, ...]
-
-  """
-  def list_volunteers do
-    Repo.all(from v in Volunteer, order_by: [desc: v.id])
-  end
-
-  @doc """
-  Gets a single volunteer.
-
-  Raises `Ecto.NoResultsError` if the Volunteer does not exist.
-
-  ## Examples
-
-      iex> get_volunteer!(123)
-      %Volunteer{}
-
-      iex> get_volunteer!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_volunteer!(id), do: Repo.get!(Volunteer, id)
-
-  @doc """
-  Creates a volunteer.
-
-  ## Examples
-
-      iex> create_volunteer(%{field: value})
-      {:ok, %Volunteer{}}
-
-      iex> create_volunteer(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
   def create_volunteer(attrs \\ %{}) do
     %Volunteer{}
     |> Volunteer.changeset(attrs)
@@ -80,6 +39,12 @@ defmodule LiveViewStudio.Volunteers do
   end
 
   def broadcast({:error, _reason} = error, _event), do: error
+
+  def list_volunteers do
+    Repo.all(from v in Volunteer, order_by: [desc: v.id])
+  end
+
+  def get_volunteer!(id), do: Repo.get!(Volunteer, id)
 
   @doc """
   Deletes a volunteer.

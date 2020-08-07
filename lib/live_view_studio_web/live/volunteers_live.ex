@@ -62,24 +62,15 @@ defmodule LiveViewStudioWeb.VolunteersLive do
   end
 
   def handle_info({:volunteer_created, volunteer}, socket) do
-    socket =
-      update(
-        socket,
-        :volunteers,
-        fn volunteers -> [volunteer | volunteers] end
-      )
-
+    socket = update_socket_from_broadcast(socket, volunteer)
     {:noreply, socket}
   end
 
   def handle_info({:volunteer_updated, volunteer}, socket) do
-    socket =
-      update(
-        socket,
-        :volunteers,
-        fn volunteers -> [volunteer | volunteers] end
-      )
-
+    socket = update_socket_from_broadcast(socket, volunteer)
     {:noreply, socket}
   end
+
+  defp update_socket_from_broadcast(socket, volunteer),
+    do: update(socket, :volunteers, fn volunteers -> [volunteer | volunteers] end)
 end

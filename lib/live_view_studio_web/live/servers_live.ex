@@ -84,10 +84,28 @@ defmodule LiveViewStudioWeb.ServersLive do
     end
   end
 
+  def handle_event("toggle-status", %{"id" => id}, socket) do
+    server = Servers.get_server!(id)
+
+    new_status = if server.status == "down", do: "up", else: "down"
+
+    {:ok, server} = Servers.update_server(server, %{status: new_status})
+
+    socket =
+      assign(
+        socket,
+        selected_server: server,
+        servers: Servers.list_servers()
+      )
+
+    {:noreply, socket}
+  end
+
   defp link_body(server) do
-    assigns = %{name: server.name}
+    assigns = %{name: server.name, status: server.status}
 
     ~L"""
+    <span class="status <%= @status %>"></span>
     <img src="/images/server.svg">
     <%= @name %>
     """

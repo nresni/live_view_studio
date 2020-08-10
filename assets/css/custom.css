@@ -368,6 +368,22 @@ ul.examples {
         @apply text-white bg-indigo-900;
       }
 
+      .add {
+        @apply bg-indigo-600;
+      }
+
+      .status {
+        @apply h-4 w-4 rounded-full mr-2;
+      }
+
+      .status.up {
+        @apply bg-green-400;
+      }
+
+      .status.down {
+        @apply bg-red-400;
+      }
+
       a {
         @apply text-sm leading-5 font-medium flex items-center px-2 py-3 rounded-md mb-2;
       }

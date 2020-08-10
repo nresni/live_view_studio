@@ -84,18 +84,27 @@ defmodule LiveViewStudioWeb.ServersLive do
     end
   end
 
-  def handle_event("toggle-status", %{"id" => id}, socket) do
+  def handle_event("toggle-status", %{"id" => id}, %{assigns: %{servers: servers}} = socket) do
     server = Servers.get_server!(id)
 
     new_status = if server.status == "down", do: "up", else: "down"
 
-    {:ok, server} = Servers.update_server(server, %{status: new_status})
+    {:ok, selected_server} = Servers.update_server(server, %{status: new_status})
+
+    servers =
+      List.update_at(
+        servers,
+        Enum.find_index(servers, &(&1.id == selected_server.id)),
+        fn _server ->
+          selected_server
+        end
+      )
 
     socket =
       assign(
         socket,
-        selected_server: server,
-        servers: Servers.list_servers()
+        selected_server: selected_server,
+        servers: servers
       )
 
     {:noreply, socket}
